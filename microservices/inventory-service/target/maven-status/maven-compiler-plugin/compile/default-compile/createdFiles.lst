@@ -1,1 +1,3 @@
 com\example\inventoryservice\InventoryServiceApplication.class
+com\example\inventoryservice\controller\InventoryController.class
+com\example\inventoryservice\dto\InventoryDto.class
