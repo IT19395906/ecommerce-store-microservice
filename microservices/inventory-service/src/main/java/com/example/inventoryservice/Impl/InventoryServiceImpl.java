@@ -36,8 +36,8 @@ public class InventoryServiceImpl implements InventoryService{
 
     @Override
     public InventoryDto addItem(InventoryDto inventoryDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addItem'");
+        inventoryRepository.save(modelMapper.map(inventoryDto, Inventory.class));
+        return inventoryDto;
     }
 
     @Override
@@ -48,8 +48,8 @@ public class InventoryServiceImpl implements InventoryService{
 
     @Override
     public String deleteItem(Integer itemId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteItem'");
+        inventoryRepository.deleteById(itemId);
+        return "Successfully Deleted";
     }
 
 }
