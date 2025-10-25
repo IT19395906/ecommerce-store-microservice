@@ -1,5 +1,7 @@
 C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\inventory-service\src\main\java\com\example\inventoryservice\controller\InventoryController.java
 C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\inventory-service\src\main\java\com\example\inventoryservice\dto\InventoryDto.java
+C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\inventory-service\src\main\java\com\example\inventoryservice\entity\Inventory.java
 C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\inventory-service\src\main\java\com\example\inventoryservice\Impl\InventoryServiceImpl.java
 C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\inventory-service\src\main\java\com\example\inventoryservice\InventoryServiceApplication.java
+C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\inventory-service\src\main\java\com\example\inventoryservice\repo\InventoryRepository.java
 C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\inventory-service\src\main\java\com\example\inventoryservice\service\InventoryService.java
