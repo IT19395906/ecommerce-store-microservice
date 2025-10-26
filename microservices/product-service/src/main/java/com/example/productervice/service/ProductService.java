@@ -11,4 +11,8 @@ public interface ProductService {
     ProductDto getProductById(Integer productId);
 
     ProductDto addProduct(ProductDto productDto);
+
+    ProductDto updateProduct(Integer productId, ProductDto productDto);
+
+    String deleteProduct(Integer productId);
 }
