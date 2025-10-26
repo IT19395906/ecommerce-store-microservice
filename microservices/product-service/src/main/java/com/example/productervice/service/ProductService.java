@@ -7,4 +7,8 @@ import com.example.productervice.dto.ProductDto;
 public interface ProductService {
 
     List<ProductDto> getProducts();
+
+    ProductDto getProductById(Integer productId);
+
+    ProductDto addProduct(ProductDto productDto);
 }
