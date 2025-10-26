@@ -13,6 +13,8 @@ import com.example.inventoryservice.entity.Inventory;
 import com.example.inventoryservice.repo.InventoryRepository;
 import com.example.inventoryservice.service.InventoryService;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class InventoryServiceImpl implements InventoryService{
 
@@ -42,8 +44,16 @@ public class InventoryServiceImpl implements InventoryService{
 
     @Override
     public InventoryDto updateItem(Integer itemId, InventoryDto inventoryDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateItem'");
+        Optional<Inventory> item = inventoryRepository.findById(itemId);
+        if(!item.isPresent()){
+            throw new EntityNotFoundException("Item id" + itemId + "not found");
+        }
+
+        Inventory existing = item.get();
+
+        modelMapper.map(inventoryDto,existing);
+        Inventory updated = inventoryRepository.save(existing);
+        return modelMapper.map(updated, InventoryDto.class);
     }
 
     @Override
