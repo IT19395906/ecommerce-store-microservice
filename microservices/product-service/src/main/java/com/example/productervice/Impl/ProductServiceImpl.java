@@ -37,33 +37,45 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto getProductById(Integer productId) {
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new EntityNotFoundException("Product id" + productId + "not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Product id " + productId + " not found"));
 
-            ProductDto dto = new ProductDto();
-            dto.setId(product.getId());
-            dto.setProductId(product.getProductId());
-            dto.setProductName(product.getProductName());
-            dto.setDescription(product.getDescription());
-            dto.setForSale(product.getForSale());
-            return dto;
+        ProductDto dto = new ProductDto();
+        dto.setId(product.getId());
+        dto.setProductId(product.getProductId());
+        dto.setProductName(product.getProductName());
+        dto.setDescription(product.getDescription());
+        dto.setForSale(product.getForSale());
+        return dto;
     }
 
     @Override
     public ProductDto addProduct(ProductDto productDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addProduct'");
+        Product product = new Product();
+        product.setId(productDto.getId());
+        product.setProductId(productDto.getProductId());
+        product.setProductName(productDto.getProductName());
+        product.setDescription(productDto.getDescription());
+        product.setForSale(productDto.getForSale());
+        productRepository.save(product);
+        return productDto;
     }
 
     @Override
     public ProductDto updateProduct(Integer productId, ProductDto productDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateProduct'");
+        Product existing = productRepository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("Product id " + productId + " not found"));
+        existing.setProductId(productDto.getProductId());
+        existing.setProductName(productDto.getProductName());
+        existing.setDescription(productDto.getDescription());
+        existing.setForSale(productDto.getForSale());
+        productRepository.save(existing);
+        return productDto;
     }
 
     @Override
     public String deleteProduct(Integer productId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteProduct'");
+        productRepository.deleteById(productId);
+        return "Successfully deleted";
     }
 
 }
