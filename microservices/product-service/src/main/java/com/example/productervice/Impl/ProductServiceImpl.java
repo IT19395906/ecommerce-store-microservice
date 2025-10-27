@@ -56,8 +56,15 @@ public class ProductServiceImpl implements ProductService {
         product.setProductName(productDto.getProductName());
         product.setDescription(productDto.getDescription());
         product.setForSale(productDto.getForSale());
-        productRepository.save(product);
-        return productDto;
+        Product savedProduct = productRepository.save(product);
+
+        ProductDto dto = new ProductDto();
+        dto.setId(savedProduct.getId());
+        dto.setProductId(savedProduct.getProductId());
+        dto.setProductName(savedProduct.getProductName());
+        dto.setDescription(savedProduct.getDescription());
+        dto.setForSale(savedProduct.getForSale());
+        return dto;
     }
 
     @Override
@@ -68,12 +75,22 @@ public class ProductServiceImpl implements ProductService {
         existing.setProductName(productDto.getProductName());
         existing.setDescription(productDto.getDescription());
         existing.setForSale(productDto.getForSale());
-        productRepository.save(existing);
-        return productDto;
+        Product updatedProduct = productRepository.save(existing);
+
+        ProductDto dto = new ProductDto();
+        dto.setId(updatedProduct.getId());
+        dto.setProductId(updatedProduct.getProductId());
+        dto.setProductName(updatedProduct.getProductName());
+        dto.setDescription(updatedProduct.getDescription());
+        dto.setForSale(updatedProduct.getForSale());
+        return dto;
     }
 
     @Override
     public String deleteProduct(Integer productId) {
+        if (!productRepository.existsById(productId)) {
+            throw new EntityNotFoundException("Product id " + productId + " not found");
+        }
         productRepository.deleteById(productId);
         return "Successfully deleted";
     }
