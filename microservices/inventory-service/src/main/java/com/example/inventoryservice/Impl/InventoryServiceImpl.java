@@ -33,20 +33,23 @@ public class InventoryServiceImpl implements InventoryService{
     @Override
     public InventoryDto getItemById(Integer itemId) {
         Optional<Inventory> item = inventoryRepository.findById(itemId);
+        if(!item.isPresent()){
+            throw new EntityNotFoundException("Item id " + itemId + " not found");
+        }
         return modelMapper.map(item,InventoryDto.class);
     }
 
     @Override
     public InventoryDto addItem(InventoryDto inventoryDto) {
-        inventoryRepository.save(modelMapper.map(inventoryDto, Inventory.class));
-        return inventoryDto;
+        Inventory savedItem = inventoryRepository.save(modelMapper.map(inventoryDto, Inventory.class));
+        return modelMapper.map(savedItem,InventoryDto.class);
     }
 
     @Override
     public InventoryDto updateItem(Integer itemId, InventoryDto inventoryDto) {
         Optional<Inventory> item = inventoryRepository.findById(itemId);
         if(!item.isPresent()){
-            throw new EntityNotFoundException("Item id" + itemId + "not found");
+            throw new EntityNotFoundException("Item id " + itemId + " not found");
         }
 
         Inventory existing = item.get();
@@ -58,6 +61,9 @@ public class InventoryServiceImpl implements InventoryService{
 
     @Override
     public String deleteItem(Integer itemId) {
+        if(!inventoryRepository.existsById(itemId)){
+            throw new EntityNotFoundException("Item id " + itemId + " not found");
+        }
         inventoryRepository.deleteById(itemId);
         return "Successfully Deleted";
     }
