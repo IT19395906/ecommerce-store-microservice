@@ -1,6 +1,7 @@
 package com.example.orderservice.Impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.entity.Order;
 import com.example.orderservice.repo.OrderRepository;
 import com.example.orderservice.service.OrderService;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -25,8 +28,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto getOrderById(Integer orderId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getOrderById'");
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new EntityNotFoundException("Order id " + orderId + " not found"));
+        return convertToDto(order);
     }
 
     @Override
