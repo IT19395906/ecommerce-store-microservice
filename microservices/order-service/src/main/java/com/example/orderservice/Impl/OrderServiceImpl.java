@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.orderservice.dto.OrderDto;
+import com.example.orderservice.entity.Order;
 import com.example.orderservice.service.OrderService;
 
 @Service
@@ -38,6 +39,24 @@ public class OrderServiceImpl implements OrderService {
     public String deleteOrder(Integer orderId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteOrder'");
+    }
+
+    private OrderDto convertToDto(Order order){
+        OrderDto dto = new OrderDto();
+            dto.setId(order.getId());
+            dto.setItemId(order.getItemId());
+            dto.setAmount(order.getAmount());
+            dto.setOrderDate(order.getOrderDate());
+            return dto;
+    }
+
+    private Order convertToEntity(OrderDto orderDto){
+        Order entity = new Order();
+        entity.setId(orderDto.getId());
+        entity.setItemId(orderDto.getItemId());
+        entity.setAmount(orderDto.getAmount());
+        entity.setOrderDate(orderDto.getOrderDate());
+        return entity;
     }
 
 }
