@@ -1,20 +1,26 @@
 package com.example.orderservice.Impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.entity.Order;
+import com.example.orderservice.repo.OrderRepository;
 import com.example.orderservice.service.OrderService;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
+    @Autowired
+    OrderRepository orderRepository;
+
     @Override
     public List<OrderDto> getOrders() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getOrders'");
+        List<Order> orderList = orderRepository.findAll();
+        return orderList.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     @Override
