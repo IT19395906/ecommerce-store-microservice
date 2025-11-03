@@ -34,8 +34,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto addOrder(OrderDto orderDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addOrder'");
+        Order savedOrder = orderRepository.save(convertToEntity(orderDto));
+        return convertToDto(savedOrder);
     }
 
     @Override

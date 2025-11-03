@@ -36,7 +36,7 @@ public class InventoryServiceImpl implements InventoryService{
         if(!item.isPresent()){
             throw new EntityNotFoundException("Item id " + itemId + " not found");
         }
-        return modelMapper.map(item,InventoryDto.class);
+        return modelMapper.map(item.get(),InventoryDto.class);
     }
 
     @Override
