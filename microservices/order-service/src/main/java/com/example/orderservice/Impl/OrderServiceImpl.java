@@ -46,8 +46,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public String deleteOrder(Integer orderId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteOrder'");
+        if(!orderRepository.existsById(orderId)){
+            throw new EntityNotFoundException("Order id " + orderId + " not found");
+        }
+        orderRepository.deleteById(orderId);
+        return "Successfully Deleted";
     }
 
     private OrderDto convertToDto(Order order){
