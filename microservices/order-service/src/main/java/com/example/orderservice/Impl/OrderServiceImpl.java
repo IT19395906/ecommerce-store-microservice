@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.entity.Order;
@@ -13,12 +14,16 @@ import com.example.orderservice.repo.OrderRepository;
 import com.example.orderservice.service.OrderService;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderRepository orderRepository;
+
+    private final WebClient webClient;
 
     @Override
     public List<OrderDto> getOrders() {
@@ -34,6 +39,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto addOrder(OrderDto orderDto) {
+        Integer itemId = orderDto.getItemId();
+        // webClient.get().uri("http://localhost:8080/api/inventory/item/{itemId}").retrieve().bodyToMono()
         Order savedOrder = orderRepository.save(convertToEntity(orderDto));
         return convertToDto(savedOrder);
     }

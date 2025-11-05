@@ -1,3 +1,7 @@
+com\example\inventoryservice\service\InventoryService.class
+com\example\inventoryservice\entity\Inventory.class
 com\example\inventoryservice\InventoryServiceApplication.class
+com\example\inventoryservice\repo\InventoryRepository.class
+com\example\inventoryservice\Impl\InventoryServiceImpl.class
 com\example\inventoryservice\controller\InventoryController.class
 com\example\inventoryservice\dto\InventoryDto.class
