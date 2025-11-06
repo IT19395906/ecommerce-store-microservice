@@ -30,9 +30,14 @@ public class InventoryController {
         return inventoryService.getItems();
     }
 
+    @GetMapping("item/{id}")
+    public InventoryDto getItemById(@PathVariable Integer id) {
+        return inventoryService.getItemById(id);
+    }
+
     @GetMapping("item/{itemId}")
-    public InventoryDto getItemById(@PathVariable Integer itemId) {
-        return inventoryService.getItemById(itemId);
+    public InventoryDto getItemByItemId(@PathVariable Integer itemId) {
+        return inventoryService.getItemByItemId(itemId);
     }
 
     @PostMapping("addItem")

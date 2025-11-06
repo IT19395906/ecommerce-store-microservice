@@ -31,12 +31,21 @@ public class InventoryServiceImpl implements InventoryService{
     }
 
     @Override
-    public InventoryDto getItemById(Integer itemId) {
-        Optional<Inventory> item = inventoryRepository.findById(itemId);
+    public InventoryDto getItemById(Integer id) {
+        Optional<Inventory> item = inventoryRepository.findById(id);
         if(!item.isPresent()){
-            throw new EntityNotFoundException("Item id " + itemId + " not found");
+            throw new EntityNotFoundException("Id " + id + " not found");
         }
         return modelMapper.map(item.get(),InventoryDto.class);
+    }
+
+    @Override
+    public InventoryDto getItemByItemId(Integer itemId) {
+        Inventory item = inventoryRepository.getItemByItemId(itemId);
+        if(item == null){
+            throw new EntityNotFoundException("Item id " + itemId + " not found");
+        }
+        return modelMapper.map(item,InventoryDto.class);
     }
 
     @Override

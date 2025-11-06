@@ -8,7 +8,9 @@ public interface InventoryService {
 
     List<InventoryDto> getItems();
 
-    InventoryDto getItemById(Integer itemId);
+    InventoryDto getItemById(Integer id);
+
+    InventoryDto getItemByItemId(Integer itemId);
 
     InventoryDto addItem(InventoryDto inventoryDto);
 
