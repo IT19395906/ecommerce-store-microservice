@@ -43,8 +43,12 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto addOrder(OrderDto orderDto) {
         Integer itemId = orderDto.getItemId();
         try {
-            inventoryWebClient.get().uri("http://localhost:8080/api/inventory/item/byitemid/{itemId}", itemId).retrieve()
+            InventoryDto response = inventoryWebClient.get()
+                    .uri("http://localhost:8080/api/inventory/item/byitemid/{itemId}", itemId).retrieve()
                     .bodyToMono(InventoryDto.class).block();
+            if (response.getQuantity() > 0) {
+
+            }
         } catch (WebClientResponseException.NotFound e) {
             throw new EntityNotFoundException("Item id " + itemId + " not found");
         } catch (WebClientResponseException e) {
