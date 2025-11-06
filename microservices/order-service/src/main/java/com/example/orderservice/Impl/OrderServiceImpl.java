@@ -1,13 +1,10 @@
 package com.example.orderservice.Impl;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
@@ -27,7 +24,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderRepository orderRepository;
 
-    private final WebClient webClient;
+    private final WebClient inventoryWebClient;
 
     @Override
     public List<OrderDto> getOrders() {
@@ -46,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto addOrder(OrderDto orderDto) {
         Integer itemId = orderDto.getItemId();
         try {
-            webClient.get().uri("http://localhost:8080/api/inventory/item/byitemid/{itemId}", itemId).retrieve()
+            inventoryWebClient.get().uri("http://localhost:8080/api/inventory/item/byitemid/{itemId}", itemId).retrieve()
                     .bodyToMono(InventoryDto.class).block();
         } catch (WebClientResponseException.NotFound e) {
             throw new EntityNotFoundException("Item id " + itemId + " not found");
