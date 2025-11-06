@@ -46,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto addOrder(OrderDto orderDto) {
         Integer itemId = orderDto.getItemId();
         try {
-            webClient.get().uri("http://localhost:8080/api/inventory/item/{itemId}", itemId).retrieve()
+            webClient.get().uri("http://localhost:8080/api/inventory/item/byitemid/{itemId}", itemId).retrieve()
                     .bodyToMono(InventoryDto.class).block();
         } catch (WebClientResponseException.NotFound e) {
             throw new EntityNotFoundException("Item id " + itemId + " not found");

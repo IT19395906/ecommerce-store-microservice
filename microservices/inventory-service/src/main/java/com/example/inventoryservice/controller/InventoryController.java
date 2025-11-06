@@ -35,7 +35,7 @@ public class InventoryController {
         return inventoryService.getItemById(id);
     }
 
-    @GetMapping("item/{itemId}")
+    @GetMapping("item/byitemid/{itemId}")
     public InventoryDto getItemByItemId(@PathVariable Integer itemId) {
         return inventoryService.getItemByItemId(itemId);
     }
