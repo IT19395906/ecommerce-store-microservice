@@ -13,6 +13,7 @@ import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.entity.Order;
 import com.example.orderservice.repo.OrderRepository;
 import com.example.orderservice.service.OrderService;
+import com.example.productervice.dto.ProductDto;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ public class OrderServiceImpl implements OrderService {
     OrderRepository orderRepository;
 
     private final WebClient inventoryWebClient;
+    private final WebClient productWebClient;
 
     @Override
     public List<OrderDto> getOrders() {
@@ -43,12 +45,24 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto addOrder(OrderDto orderDto) {
         Integer itemId = orderDto.getItemId();
         try {
-            InventoryDto response = inventoryWebClient.get()
+            InventoryDto responseI = inventoryWebClient.get()
                     .uri("http://localhost:8080/api/inventory/item/byitemid/{itemId}", itemId).retrieve()
                     .bodyToMono(InventoryDto.class).block();
-            if (response.getQuantity() > 0) {
 
+            Integer productId = responseI.getProductId();
+
+            ProductDto responseP = productWebClient.get()
+                    .uri("http://localhost:8080/api/product/product/byproductid/{productId}", productId).retrieve()
+                    .bodyToMono(ProductDto.class).block();
+
+            if (responseI.getQuantity() > 0) {
+                if (responseP.getForSale() == 1) {
+                    Order savedOrder = orderRepository.save(convertToEntity(orderDto));
+                    return convertToDto(savedOrder);
+                }
+            } else {
             }
+
         } catch (WebClientResponseException.NotFound e) {
             throw new EntityNotFoundException("Item id " + itemId + " not found");
         } catch (WebClientResponseException e) {

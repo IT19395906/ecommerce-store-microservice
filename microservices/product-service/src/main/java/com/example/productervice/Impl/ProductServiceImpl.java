@@ -34,9 +34,25 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto getProductById(Integer productId) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new EntityNotFoundException("Product id " + productId + " not found"));
+    public ProductDto getProductById(Integer id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Id " + id + " not found"));
+
+        ProductDto dto = new ProductDto();
+        dto.setId(product.getId());
+        dto.setProductId(product.getProductId());
+        dto.setProductName(product.getProductName());
+        dto.setDescription(product.getDescription());
+        dto.setForSale(product.getForSale());
+        return dto;
+    }
+
+    @Override
+    public ProductDto getProductByProductId(Integer productId) {
+        Product product = productRepository.getProductByProductId(productId);
+        if (product == null) {
+            throw new EntityNotFoundException("Product id " + productId + " not found");
+        }
 
         ProductDto dto = new ProductDto();
         dto.setId(product.getId());

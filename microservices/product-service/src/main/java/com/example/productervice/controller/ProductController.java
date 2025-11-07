@@ -30,9 +30,14 @@ public class ProductController {
         return productService.getProducts();
     }
 
-    @GetMapping("product/{productId}")
-    public ProductDto getProductById(@PathVariable Integer productId) {
-        return productService.getProductById(productId);
+    @GetMapping("product/{id}")
+    public ProductDto getProductById(@PathVariable Integer id) {
+        return productService.getProductById(id);
+    }
+
+    @GetMapping("product/byproductid/{productId}")
+    public ProductDto getProductByProductId(@PathVariable Integer productId) {
+        return productService.getProductByProductId(productId);
     }
 
     @PostMapping("addProduct")
