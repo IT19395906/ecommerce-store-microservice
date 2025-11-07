@@ -59,8 +59,11 @@ public class OrderServiceImpl implements OrderService {
                 if (responseP.getForSale() == 1) {
                     Order savedOrder = orderRepository.save(convertToEntity(orderDto));
                     return convertToDto(savedOrder);
+                } else {
+                    throw new IllegalStateException("Product id " + productId + " is not for sale");
                 }
             } else {
+                throw new IllegalStateException("Item id " + itemId + " is out of stock");
             }
 
         } catch (WebClientResponseException.NotFound e) {
@@ -68,8 +71,6 @@ public class OrderServiceImpl implements OrderService {
         } catch (WebClientResponseException e) {
             throw new RuntimeException(e.getMessage());
         }
-        Order savedOrder = orderRepository.save(convertToEntity(orderDto));
-        return convertToDto(savedOrder);
     }
 
     @Override
