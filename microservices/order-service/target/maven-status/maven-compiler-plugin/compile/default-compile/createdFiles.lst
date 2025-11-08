@@ -1,8 +1,0 @@
-com\example\orderservice\config\WebClientService.class
-com\example\orderservice\dto\OrderDto.class
-com\example\orderservice\OrderServiceApplication.class
-com\example\orderservice\repo\OrderRepository.class
-com\example\orderservice\controller\OrderController.class
-com\example\orderservice\Impl\OrderServiceImpl.class
-com\example\orderservice\service\OrderService.class
-com\example\orderservice\entity\Order.class
