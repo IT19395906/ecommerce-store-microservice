@@ -41,6 +41,11 @@
       <artifactId>product-service</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.example.microservices</groupId>
+      <artifactId>common</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
   </dependencies>
   <build>
       <plugins>
