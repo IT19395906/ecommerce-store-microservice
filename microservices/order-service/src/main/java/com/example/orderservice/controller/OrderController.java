@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.common.CommonResponseDto;
+import com.example.orderservice.Impl.Producer;
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.service.OrderService;
 
@@ -25,6 +27,9 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private Producer producer;
+
     @GetMapping("getOrders")
     public List<OrderDto> getOrders() {
         return orderService.getOrders();
@@ -37,7 +42,9 @@ public class OrderController {
 
     @PostMapping("addOrder")
     public OrderDto addOrder(@RequestBody OrderDto orderDto) {
-        return orderService.addOrder(orderDto);
+        OrderDto order = orderService.addOrder(orderDto);
+        producer.sendMessage(new CommonResponseDto("message sent to kafka saying new order created", "CREATED", order.getId()));
+        return order;
     }
 
     @PutMapping("updateOrder/{orderId}")

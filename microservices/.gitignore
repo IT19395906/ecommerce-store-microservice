@@ -3,5 +3,6 @@ target/
 .mvn/timing.properties
 .idea/
 .vscode/
+
 *.class
 src/test/
