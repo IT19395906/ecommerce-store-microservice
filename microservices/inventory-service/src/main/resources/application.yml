@@ -17,4 +17,12 @@ spring:
     # properties:
       # hibernate:
       #   dialect: org.hibernate.dialect.MySQL8Dialect                above Hibernate 6 version auto detect correct SQL dialect from JDBC no need to manually MySQL8Dialect is deprecated
-
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: inventory
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      # properties.spring.deserializer.value.delega
+        
