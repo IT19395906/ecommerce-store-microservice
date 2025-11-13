@@ -3,6 +3,7 @@ C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\order-s
 C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\order-service\src\main\java\com\example\orderservice\controller\OrderController.java
 C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\order-service\src\main\java\com\example\orderservice\dto\OrderDto.java
 C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\order-service\src\main\java\com\example\orderservice\entity\Order.java
+C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\order-service\src\main\java\com\example\orderservice\enums\OrderStatus.java
 C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\order-service\src\main\java\com\example\orderservice\Impl\OrderServiceImpl.java
 C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\order-service\src\main\java\com\example\orderservice\Impl\Producer.java
 C:\Users\HP\Desktop\ecommerce\ecommerce-store-microservice\microservices\order-service\src\main\java\com\example\orderservice\OrderServiceApplication.java
