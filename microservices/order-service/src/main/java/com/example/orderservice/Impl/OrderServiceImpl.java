@@ -94,6 +94,7 @@ public class OrderServiceImpl implements OrderService {
         dto.setItemId(order.getItemId());
         dto.setAmount(order.getAmount());
         dto.setOrderDate(order.getOrderDate());
+        dto.setOrderStatus(order.getOrderStatus());
         return dto;
     }
 
@@ -103,6 +104,7 @@ public class OrderServiceImpl implements OrderService {
         entity.setItemId(orderDto.getItemId());
         entity.setAmount(orderDto.getAmount());
         entity.setOrderDate(orderDto.getOrderDate());
+        entity.setOrderStatus(orderDto.getOrderStatus());
         return entity;
     }
 

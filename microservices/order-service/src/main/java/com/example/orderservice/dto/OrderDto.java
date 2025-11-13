@@ -1,5 +1,7 @@
 package com.example.orderservice.dto;
 
+import com.example.orderservice.enums.OrderStatus;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +16,5 @@ public class OrderDto {
     private int itemId;
     private String orderDate;
     private int amount;
+    private OrderStatus orderStatus = OrderStatus.CREATED;
 }
