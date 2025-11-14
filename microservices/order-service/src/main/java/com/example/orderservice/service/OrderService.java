@@ -15,4 +15,6 @@ public interface OrderService {
     OrderDto updateOrder(Integer orderId, OrderDto orderDto);
 
     String deleteOrder(Integer orderId);
+
+    String cancelOrder(Integer orderId);
 }

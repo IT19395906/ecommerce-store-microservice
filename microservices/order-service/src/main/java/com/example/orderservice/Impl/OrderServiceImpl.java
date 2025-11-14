@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import com.example.inventoryservice.dto.InventoryDto;
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.entity.Order;
+import com.example.orderservice.enums.OrderStatus;
 import com.example.orderservice.repo.OrderRepository;
 import com.example.orderservice.service.OrderService;
 import com.example.productervice.dto.ProductDto;
@@ -57,6 +58,7 @@ public class OrderServiceImpl implements OrderService {
 
             if (responseI.getQuantity() > 0) {
                 if (responseP.getForSale() == 1) {
+                    orderDto.setOrderStatus(OrderStatus.CREATED);
                     Order savedOrder = orderRepository.save(convertToEntity(orderDto));
                     return convertToDto(savedOrder);
                 } else {
@@ -86,6 +88,15 @@ public class OrderServiceImpl implements OrderService {
         }
         orderRepository.deleteById(orderId);
         return "Successfully Deleted";
+    }
+
+    @Override
+    public String cancelOrder(Integer orderId) {
+        Order cancelledOrder = orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException("Order id " + orderId + " not found"));
+        cancelledOrder.setOrderStatus(OrderStatus.CANCELLED);
+        orderRepository.save(cancelledOrder);
+        return "Successfully Cancelled";
     }
 
     private OrderDto convertToDto(Order order) {

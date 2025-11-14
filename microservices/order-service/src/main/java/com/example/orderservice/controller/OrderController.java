@@ -57,4 +57,9 @@ public class OrderController {
         return orderService.deleteOrder(orderId);
     }
 
+    @DeleteMapping("cancelOrder/{orderId}")
+    public String cancelOrder(@PathVariable Integer orderId) {
+        return orderService.cancelOrder(orderId);
+    }
+
 }
