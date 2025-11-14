@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.common.CommonResponseDto;
 import com.example.orderservice.Impl.Producer;
 import com.example.orderservice.dto.OrderDto;
+import com.example.orderservice.enums.OrderStatus;
 import com.example.orderservice.service.OrderService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +54,8 @@ public class OrderController {
     @PostMapping("addOrder")
     public OrderDto addOrder(@RequestBody OrderDto orderDto) {
         OrderDto order = orderService.addOrder(orderDto);
-        producer.sendMessage(new CommonResponseDto("message sent to kafka saying new order created", "CREATED", order.getId()));
+        producer.sendMessage(
+                new CommonResponseDto("message sent to kafka saying new order created", "CREATED", order.getId()));
         return order;
     }
 
@@ -69,7 +71,10 @@ public class OrderController {
 
     @DeleteMapping("cancelOrder/{orderId}")
     public String cancelOrder(@PathVariable Integer orderId) {
-        return orderService.cancelOrder(orderId);
+        String order = orderService.cancelOrder(orderId);
+        producer.sendMessage(new CommonResponseDto("message sent to kafka saying order cancelled",
+                OrderStatus.CANCELLED.toString(), orderId));
+        return order;
     }
 
 }
