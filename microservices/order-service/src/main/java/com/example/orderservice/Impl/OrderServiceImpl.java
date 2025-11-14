@@ -36,6 +36,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<OrderDto> getActiveOrders() {
+        List<Order> orderList = orderRepository.findAll();
+        return orderList.stream().filter(order->order.getOrderStatus() != OrderStatus.CANCELLED).map(this::convertToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OrderDto> getCancelOrders() {
+        List<Order> orderList = orderRepository.findAll();
+        return orderList.stream().filter(order->order.getOrderStatus() == OrderStatus.CANCELLED).map(this::convertToDto).collect(Collectors.toList());
+    }
+
+    @Override
     public OrderDto getOrderById(Integer orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new EntityNotFoundException("Order id " + orderId + " not found"));

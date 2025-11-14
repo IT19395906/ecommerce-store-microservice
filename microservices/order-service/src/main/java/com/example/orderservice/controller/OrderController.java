@@ -35,6 +35,16 @@ public class OrderController {
         return orderService.getOrders();
     }
 
+    @GetMapping("getActiveOrders")
+    public List<OrderDto> getActiveOrders() {
+        return orderService.getActiveOrders();
+    }
+
+    @GetMapping("getCancelOrders")
+    public List<OrderDto> getCancelOrders() {
+        return orderService.getCancelOrders();
+    }
+
     @GetMapping("order/{orderId}")
     public OrderDto getOrderById(@PathVariable Integer orderId) {
         return orderService.getOrderById(orderId);

@@ -7,6 +7,10 @@ import com.example.orderservice.dto.OrderDto;
 public interface OrderService {
 
     List<OrderDto> getOrders();
+    
+    List<OrderDto> getActiveOrders();
+    
+    List<OrderDto> getCancelOrders();
 
     OrderDto getOrderById(Integer orderId);
 
