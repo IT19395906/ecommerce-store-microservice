@@ -29,6 +29,7 @@ public class ProductServiceImpl implements ProductService {
             dto.setProductName(product.getProductName());
             dto.setDescription(product.getDescription());
             dto.setForSale(product.getForSale());
+            dto.setPrice(product.getPrice());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -44,6 +45,7 @@ public class ProductServiceImpl implements ProductService {
         dto.setProductName(product.getProductName());
         dto.setDescription(product.getDescription());
         dto.setForSale(product.getForSale());
+        dto.setPrice(product.getPrice());
         return dto;
     }
 
@@ -60,6 +62,7 @@ public class ProductServiceImpl implements ProductService {
         dto.setProductName(product.getProductName());
         dto.setDescription(product.getDescription());
         dto.setForSale(product.getForSale());
+        dto.setPrice(product.getPrice());
         return dto;
     }
 
@@ -71,6 +74,7 @@ public class ProductServiceImpl implements ProductService {
         product.setProductName(productDto.getProductName());
         product.setDescription(productDto.getDescription());
         product.setForSale(productDto.getForSale());
+        product.setPrice(productDto.getPrice());
         Product savedProduct = productRepository.save(product);
 
         ProductDto dto = new ProductDto();
@@ -79,6 +83,7 @@ public class ProductServiceImpl implements ProductService {
         dto.setProductName(savedProduct.getProductName());
         dto.setDescription(savedProduct.getDescription());
         dto.setForSale(savedProduct.getForSale());
+        dto.setPrice(savedProduct.getPrice());
         return dto;
     }
 
@@ -90,6 +95,7 @@ public class ProductServiceImpl implements ProductService {
         existing.setProductName(productDto.getProductName());
         existing.setDescription(productDto.getDescription());
         existing.setForSale(productDto.getForSale());
+        existing.setPrice(productDto.getPrice());
         Product updatedProduct = productRepository.save(existing);
 
         ProductDto dto = new ProductDto();
@@ -98,6 +104,7 @@ public class ProductServiceImpl implements ProductService {
         dto.setProductName(updatedProduct.getProductName());
         dto.setDescription(updatedProduct.getDescription());
         dto.setForSale(updatedProduct.getForSale());
+        dto.setPrice(updatedProduct.getPrice());
         return dto;
     }
 

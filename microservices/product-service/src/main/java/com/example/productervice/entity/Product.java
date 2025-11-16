@@ -1,5 +1,7 @@
 package com.example.productervice.entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;
@@ -16,4 +18,5 @@ public class Product {
     private String productName;
     private String description;
     private int forSale;
+    private BigDecimal price;
 }

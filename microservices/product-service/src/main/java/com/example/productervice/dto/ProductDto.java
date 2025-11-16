@@ -1,5 +1,7 @@
 package com.example.productervice.dto;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +16,5 @@ public class ProductDto {
     private String productName;
     private String description;
     private int forSale;
+    private BigDecimal price;
 }
