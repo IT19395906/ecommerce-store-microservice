@@ -34,5 +34,5 @@ spring:
             trusted:
               packages: "*"
     template:
-      default-topic:  order_topic
+      default-topic: order_topic
         
