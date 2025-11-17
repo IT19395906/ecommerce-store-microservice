@@ -58,7 +58,7 @@ public class InventoryServiceImpl implements InventoryService{
     public InventoryDto updateItem(Integer itemId, InventoryDto inventoryDto) {
         Optional<Inventory> item = inventoryRepository.findById(itemId);
         if(!item.isPresent()){
-            throw new EntityNotFoundException("Item id " + itemId + " not found");
+            throw new EntityNotFoundException("Id " + itemId + " not found");
         }
 
         Inventory existing = item.get();
@@ -71,7 +71,7 @@ public class InventoryServiceImpl implements InventoryService{
     @Override
     public String deleteItem(Integer itemId) {
         if(!inventoryRepository.existsById(itemId)){
-            throw new EntityNotFoundException("Item id " + itemId + " not found");
+            throw new EntityNotFoundException("Id " + itemId + " not found");
         }
         inventoryRepository.deleteById(itemId);
         return "Successfully Deleted";
