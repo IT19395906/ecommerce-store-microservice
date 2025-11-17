@@ -59,6 +59,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Integer getProductIdById(Integer id) {
+        Product product = productRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Id " + id + " not found"));
+        return product.getProductId();
+    }
+
+    @Override
     public ProductDto getProductByProductId(Integer productId) {
         Product product = productRepository.getProductByProductId(productId);
         if (product == null) {

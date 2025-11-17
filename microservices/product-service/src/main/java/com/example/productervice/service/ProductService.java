@@ -10,6 +10,8 @@ public interface ProductService {
 
     ProductDto getProductById(Integer id);
 
+    Integer getProductIdById(Integer id);
+
     ProductDto getProductByProductId(Integer productId);
 
     ProductDto addProduct(ProductDto productDto);

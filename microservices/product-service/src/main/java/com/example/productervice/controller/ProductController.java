@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @CrossOrigin
@@ -33,6 +34,11 @@ public class ProductController {
     @GetMapping("product/{id}")
     public ProductDto getProductById(@PathVariable Integer id) {
         return productService.getProductById(id);
+    }
+
+    @GetMapping("productId/{id}")
+    public Integer getProductIdById(@PathVariable Integer id) {
+        return productService.getProductIdById(id);
     }
 
     @GetMapping("product/byproductid/{productId}")
