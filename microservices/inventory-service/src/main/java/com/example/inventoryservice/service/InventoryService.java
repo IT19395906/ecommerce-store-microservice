@@ -10,11 +10,13 @@ public interface InventoryService {
 
     InventoryDto getItemById(Integer id);
 
+    Integer getItemIdById(Integer id);
+
     InventoryDto getItemByItemId(Integer itemId);
 
     InventoryDto addItem(InventoryDto inventoryDto);
 
-    InventoryDto updateItem(Integer itemId, InventoryDto inventoryDto);
+    InventoryDto updateItem(Integer id, InventoryDto inventoryDto);
 
     String deleteItem(Integer itemId);
 }

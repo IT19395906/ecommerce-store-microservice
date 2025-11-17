@@ -16,7 +16,7 @@ import com.example.inventoryservice.service.InventoryService;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
-public class InventoryServiceImpl implements InventoryService{
+public class InventoryServiceImpl implements InventoryService {
 
     @Autowired
     private InventoryRepository inventoryRepository;
@@ -27,54 +27,62 @@ public class InventoryServiceImpl implements InventoryService{
     @Override
     public List<InventoryDto> getItems() {
         List<Inventory> itemList = inventoryRepository.findAll();
-        return itemList.stream().map(item-> modelMapper.map(item, InventoryDto.class)).collect(Collectors.toList());
+        return itemList.stream().map(item -> modelMapper.map(item, InventoryDto.class)).collect(Collectors.toList());
     }
 
     @Override
     public InventoryDto getItemById(Integer id) {
         Optional<Inventory> item = inventoryRepository.findById(id);
-        if(!item.isPresent()){
+        if (!item.isPresent()) {
             throw new EntityNotFoundException("Id " + id + " not found");
         }
-        return modelMapper.map(item.get(),InventoryDto.class);
+        return modelMapper.map(item.get(), InventoryDto.class);
+    }
+    
+    @Override
+    public Integer getItemIdById(Integer id) {
+        Inventory item = inventoryRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Id " + id + " not found"));
+        return item.getItemId();
     }
 
     @Override
     public InventoryDto getItemByItemId(Integer itemId) {
         Inventory item = inventoryRepository.getItemByItemId(itemId);
-        if(item == null){
+        if (item == null) {
             throw new EntityNotFoundException("Item id " + itemId + " not found");
         }
-        return modelMapper.map(item,InventoryDto.class);
+        return modelMapper.map(item, InventoryDto.class);
     }
 
     @Override
     public InventoryDto addItem(InventoryDto inventoryDto) {
         Inventory savedItem = inventoryRepository.save(modelMapper.map(inventoryDto, Inventory.class));
-        return modelMapper.map(savedItem,InventoryDto.class);
+        return modelMapper.map(savedItem, InventoryDto.class);
     }
 
     @Override
-    public InventoryDto updateItem(Integer itemId, InventoryDto inventoryDto) {
-        Optional<Inventory> item = inventoryRepository.findById(itemId);
-        if(!item.isPresent()){
-            throw new EntityNotFoundException("Id " + itemId + " not found");
+    public InventoryDto updateItem(Integer id, InventoryDto inventoryDto) {
+        Optional<Inventory> item = inventoryRepository.findById(id);
+        if (!item.isPresent()) {
+            throw new EntityNotFoundException("Id " + id + " not found");
         }
 
         Inventory existing = item.get();
 
-        modelMapper.map(inventoryDto,existing);
+        modelMapper.map(inventoryDto, existing);
         Inventory updated = inventoryRepository.save(existing);
         return modelMapper.map(updated, InventoryDto.class);
     }
 
     @Override
     public String deleteItem(Integer itemId) {
-        if(!inventoryRepository.existsById(itemId)){
+        if (!inventoryRepository.existsById(itemId)) {
             throw new EntityNotFoundException("Id " + itemId + " not found");
         }
         inventoryRepository.deleteById(itemId);
         return "Successfully Deleted";
     }
-
+    
+    
 }

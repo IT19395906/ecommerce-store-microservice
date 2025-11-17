@@ -35,6 +35,11 @@ public class InventoryController {
         return inventoryService.getItemById(id);
     }
 
+    @GetMapping("itemId/{id}")
+    public Integer getItemIdById(@PathVariable Integer id) {
+        return inventoryService.getItemIdById(id);
+    }
+
     @GetMapping("item/byitemid/{itemId}")
     public InventoryDto getItemByItemId(@PathVariable Integer itemId) {
         return inventoryService.getItemByItemId(itemId);
@@ -45,9 +50,9 @@ public class InventoryController {
         return inventoryService.addItem(inventoryDto);
     }
 
-    @PutMapping("updateItem/{itemId}")
-    public InventoryDto updateItem(@PathVariable Integer itemId, @RequestBody InventoryDto inventoryDto) {
-        return inventoryService.updateItem(itemId, inventoryDto);
+    @PutMapping("updateItem/{id}")
+    public InventoryDto updateItem(@PathVariable Integer id, @RequestBody InventoryDto inventoryDto) {
+        return inventoryService.updateItem(id, inventoryDto);
     }
 
     @DeleteMapping("deleteItem/{itemId}")
