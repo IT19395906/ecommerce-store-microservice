@@ -1,6 +1,7 @@
 package com.example.productervice.entity;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -19,4 +20,8 @@ public class Product {
     private String description;
     private int forSale;
     private BigDecimal price;
+    private LocalDateTime addedDate;
+    private String addedBy;
+    private LocalDateTime updatedDate;
+    private String updatedBy;
 }

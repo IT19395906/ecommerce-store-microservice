@@ -1,5 +1,6 @@
 package com.example.productervice.Impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,10 @@ public class ProductServiceImpl implements ProductService {
             dto.setDescription(product.getDescription());
             dto.setForSale(product.getForSale());
             dto.setPrice(product.getPrice());
+            dto.setAddedDate(product.getAddedDate());
+            dto.setAddedBy(product.getAddedBy());
+            dto.setUpdatedDate(product.getUpdatedDate());
+            dto.setUpdatedBy(product.getUpdatedBy());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -46,6 +51,10 @@ public class ProductServiceImpl implements ProductService {
         dto.setDescription(product.getDescription());
         dto.setForSale(product.getForSale());
         dto.setPrice(product.getPrice());
+        dto.setAddedDate(product.getAddedDate());
+        dto.setAddedBy(product.getAddedBy());
+        dto.setUpdatedDate(product.getUpdatedDate());
+        dto.setUpdatedBy(product.getUpdatedBy());
         return dto;
     }
 
@@ -63,6 +72,10 @@ public class ProductServiceImpl implements ProductService {
         dto.setDescription(product.getDescription());
         dto.setForSale(product.getForSale());
         dto.setPrice(product.getPrice());
+        dto.setAddedDate(product.getAddedDate());
+        dto.setAddedBy(product.getAddedBy());
+        dto.setUpdatedDate(product.getUpdatedDate());
+        dto.setUpdatedBy(product.getUpdatedBy());
         return dto;
     }
 
@@ -75,6 +88,8 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(productDto.getDescription());
         product.setForSale(productDto.getForSale());
         product.setPrice(productDto.getPrice());
+        product.setAddedDate(LocalDateTime.now());
+        product.setAddedBy("Admin");
         Product savedProduct = productRepository.save(product);
 
         ProductDto dto = new ProductDto();
@@ -84,6 +99,10 @@ public class ProductServiceImpl implements ProductService {
         dto.setDescription(savedProduct.getDescription());
         dto.setForSale(savedProduct.getForSale());
         dto.setPrice(savedProduct.getPrice());
+        dto.setAddedDate(savedProduct.getAddedDate());
+        dto.setAddedBy(savedProduct.getAddedBy());
+        dto.setUpdatedDate(savedProduct.getUpdatedDate());
+        dto.setUpdatedBy(savedProduct.getUpdatedBy());
         return dto;
     }
 
@@ -96,6 +115,8 @@ public class ProductServiceImpl implements ProductService {
         existing.setDescription(productDto.getDescription());
         existing.setForSale(productDto.getForSale());
         existing.setPrice(productDto.getPrice());
+        existing.setUpdatedDate(LocalDateTime.now());
+        existing.setUpdatedBy("Admin");
         Product updatedProduct = productRepository.save(existing);
 
         ProductDto dto = new ProductDto();
@@ -105,6 +126,10 @@ public class ProductServiceImpl implements ProductService {
         dto.setDescription(updatedProduct.getDescription());
         dto.setForSale(updatedProduct.getForSale());
         dto.setPrice(updatedProduct.getPrice());
+        dto.setAddedDate(updatedProduct.getAddedDate());
+        dto.setAddedBy(updatedProduct.getAddedBy());
+        dto.setUpdatedDate(updatedProduct.getUpdatedDate());
+        dto.setUpdatedBy(updatedProduct.getUpdatedBy());
         return dto;
     }
 
