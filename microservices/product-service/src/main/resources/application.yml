@@ -17,3 +17,7 @@ spring:
     #   hibernate:
     #     dialect: org.hibernate.dialect.MySQL8Dialect                 above Hibernate 6 version auto detect correct SQL dialect from JDBC no need to manually MySQL8Dialect is deprecated
 
+eureka:
+  client:
+    service-url:                
+      defaultZone: http://localhost:8761/eureka/
